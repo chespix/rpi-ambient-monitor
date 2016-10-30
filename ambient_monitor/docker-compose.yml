@@ -1,0 +1,77 @@
+version: '2'
+services:
+  influxdb-storage:
+    image: hypriot/rpi-alpine-scratch
+    container_name: influxdb-storage
+    command:
+      - /bin/true
+    volumes:
+      - /var/lib/influxdb
+  influxdb:
+    image: dilgerm/rpi-influxdb
+    container_name: influxdb
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+    volumes_from:
+      - influxdb-storage
+  grafana-storage:
+    image: hypriot/rpi-alpine-scratch
+    container_name: grafana-storage
+    command:
+      - /bin/true
+    volumes:
+      - /var/lib/grafana
+      - ./grafana-dashboards:/var/grafana/dashboards
+  grafana-service:
+    image: pithings/rpi-grafana
+    container_name: grafana-service
+    ports:
+      - "3000:3000"
+    volumes_from:
+      - grafana-storage
+    env_file:
+      - 'env.grafana'
+    environment:
+      - VIRTUAL_HOST=$GRAFANA_HOST
+    links:
+      - influxdb
+    depends_on:
+      - nginx-proxy
+  final-stack-setup:
+    build: ./stack-final-setup
+    container_name: stack-final-setup
+    env_file:
+      - 'env.grafana'
+    links:
+      - influxdb
+      - grafana-service
+  nginx-proxy:
+    image: chespi/rpi-nginx-proxy-ssl
+    container_name: nginx-proxy
+    ports:
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx-certs:/etc/nginx/certs 
+  motion-storage:
+    image: hypriot/rpi-alpine-scratch
+    container_name: motion-storage
+    command:
+      - /bin/true
+    volumes:
+      - /var/lib/motion
+  motion-service:
+    image: chespi/rpi-motion
+    container_name: motion-service
+    depends_on:
+      - nginx-proxy
+    environment:
+      - VIRTUAL_HOST=$MOTION_HOST
+    ports:
+      - 8081:8081
+    devices:
+      - /dev/video0
+    volumes_from:
+      - motion-storage
+
