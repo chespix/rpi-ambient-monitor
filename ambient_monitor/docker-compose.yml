@@ -72,6 +72,7 @@ services:
       - 8081:8081
     devices:
       - /dev/video0
+    volumes:
+      - ./motion-conf/motion.conf:/etc/motion/motion.conf
     volumes_from:
       - motion-storage
-
