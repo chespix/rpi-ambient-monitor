@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_LOCALINFLUXDB",
-      "label": "localInfluxDB",
+      "name": "DS_INFLUX",
+      "label": "influx",
       "description": "",
       "type": "datasource",
       "pluginId": "influxdb",
@@ -57,7 +57,7 @@
       "height": "350px",
       "panels": [
         {
-          "content": "<div align=center>\n<h1> Monitor en vivo </H1>\n<h6>Panel del control de estado general</h6>\n<iframe src=\"https://admin:jEFIMhKUhOWBf2geZ9qFumH9yt0ThwFmmGD@monitor.example.com\" width=\"330\" height=\"245\" align=middle frameborder=0 ></iframe>\n</div>",
+          "content": "<div align=center>\n<h1> Monitor en vivo </H1>\n<h6>Panel del control de estado general</h6>\n<iframe src=\"https://chespi:chespi123@10.0.0.5\" width=\"245\" height=\"330\" align=middle frameborder=0 ></iframe>\n</div>",
           "editable": true,
           "error": false,
           "id": 14,
@@ -97,7 +97,7 @@
             "rgba(0, 0, 0, 0.89)",
             "rgba(0, 0, 0, 0.9)"
           ],
-          "datasource": "localInfluxDB",
+          "datasource": "${DS_INFLUX}",
           "editable": true,
           "error": false,
           "format": "none",
@@ -212,7 +212,7 @@
             "rgba(33, 240, 60, 0.89)",
             "rgba(219, 27, 53, 0.97)"
           ],
-          "datasource": "localInfluxDB",
+          "datasource": "${DS_INFLUX}",
           "editable": true,
           "error": false,
           "format": "celsius",
@@ -339,7 +339,7 @@
             "rgba(33, 240, 60, 0.89)",
             "rgba(54, 70, 245, 0.9)"
           ],
-          "datasource": "localInfluxDB",
+          "datasource": "${DS_INFLUX}",
           "editable": true,
           "error": false,
           "format": "none",
@@ -466,7 +466,7 @@
             "rgba(240, 33, 33, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "localInfluxDB",
+          "datasource": "${DS_INFLUX}",
           "editable": true,
           "error": false,
           "format": "none",
@@ -566,6 +566,12 @@
                   "key": "source",
                   "operator": "=",
                   "value": "blackbox"
+                },
+                {
+                  "condition": "AND",
+                  "key": "individual",
+                  "operator": "=",
+                  "value": "OGK"
                 }
               ]
             }
@@ -609,7 +615,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "localInfluxDB",
+          "datasource": "${DS_INFLUX}",
           "decimals": null,
           "editable": true,
           "error": false,
@@ -680,7 +686,7 @@
                   },
                   {
                     "params": [],
-                    "type": "mean"
+                    "type": "last"
                   }
                 ]
               ],
@@ -709,8 +715,8 @@
           },
           "yaxes": [
             {
-              "format": "none",
-              "label": "Humedad",
+              "format": "celsius",
+              "label": "Temperatura",
               "logBase": 1,
               "max": 50,
               "min": 0,
@@ -729,7 +735,7 @@
         {
           "aliasColors": {},
           "bars": true,
-          "datasource": "localInfluxDB",
+          "datasource": "${DS_INFLUX}",
           "decimals": null,
           "editable": true,
           "error": false,
@@ -857,7 +863,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "localInfluxDB",
+          "datasource": "${DS_INFLUX}",
           "decimals": null,
           "editable": true,
           "error": false,
@@ -977,7 +983,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "localInfluxDB",
+          "datasource": "${DS_INFLUX}",
           "decimals": null,
           "editable": true,
           "error": false,
@@ -1145,7 +1151,7 @@
     }
   ],
   "time": {
-    "from": "now-24h",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
@@ -1181,7 +1187,7 @@
   },
   "refresh": "5m",
   "schemaVersion": 12,
-  "version": 0,
+  "version": 2,
   "links": [],
   "gnetId": null
 }
