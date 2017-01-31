@@ -3,8 +3,9 @@
 # Requirements:
 # adafruit library installed:
 # https://github.com/adafruit/Adafruit_Python_DHT
-#
-#
+# python libraries installed:
+# pip install requests
+# pip install rpi.gpio
 
 # Import libraries
 import sys
@@ -14,6 +15,10 @@ import requests
 import json
 import RPi.GPIO as GPIO
 import Adafruit_DHT
+
+# InfluxDB URL and DB name
+influxdb_url = "http://influxdb:8086"
+influxdb_db = "ambient_metrics"
 
 # Setup pins and sensor model
 ambient_sensor = 11
@@ -25,9 +30,7 @@ light_pin = 8
 data_source = "blackbox"
 individual_names_by_pin =  {7: 'OGK'}
 
-# InfluxDB URL
-influxdb_url = "http://influxdb:8086"
-influxdb_db = "ambient_metrics"
+
 # This vars will hold the values of the reading
 # The units are:
 # ambient_temp_value in C

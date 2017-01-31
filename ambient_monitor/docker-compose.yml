@@ -53,7 +53,7 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx-certs:/etc/nginx/certs 
+      - ./nginx-certs:/etc/nginx/certs
   motion-storage:
     image: hypriot/rpi-alpine-scratch
     container_name: motion-storage
@@ -84,4 +84,6 @@ services:
     devices:
       - /dev/ttyAMA0
       - /dev/mem
+    links:
+      - influxdb
     privileged: true
