@@ -1,49 +1,7 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_INFLUX",
-      "label": "influx",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "influxdb",
-      "pluginName": "InfluxDB"
-    }
-  ],
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "text",
-      "name": "Text",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "3.1.1"
-    },
-    {
-      "type": "datasource",
-      "id": "influxdb",
-      "name": "InfluxDB",
-      "version": "1.0.0"
-    }
-  ],
-  "id": null,
-  "title": "Sensores Dash",
-  "description": "Un vistazo a las variables de ambiente",
+  "id": 1,
+  "title": "Sensores",
+  "originalTitle": "Sensores",
   "tags": [],
   "style": "dark",
   "timezone": "browser",
@@ -54,10 +12,10 @@
     {
       "collapse": false,
       "editable": true,
-      "height": "450px",
+      "height": "350px",
       "panels": [
         {
-          "content": "<div align=center>\n<h1> Monitor en vivo </H1>\n<h6>Panel del control de estado general</h6>\n<iframe src=\"https://admin:admin@localhost\" width=\"245\" height=\"330\" align=middle frameborder=0 ></iframe>\n</div>",
+          "content": "<div align=center>\n<h1> Monitor en vivo </H1>\n<h6>Panel del control de estado general</h6>\n<iframe src=\"https://admin:test123@blackcam.chespi.org/\" width=\"330\" height=\"245\" align=middle frameborder=0 ></iframe>\n</div>",
           "editable": true,
           "error": false,
           "id": 14,
@@ -97,7 +55,7 @@
             "rgba(0, 0, 0, 0.89)",
             "rgba(0, 0, 0, 0.9)"
           ],
-          "datasource": "${DS_INFLUX}",
+          "datasource": null,
           "editable": true,
           "error": false,
           "format": "none",
@@ -212,7 +170,7 @@
             "rgba(33, 240, 60, 0.89)",
             "rgba(219, 27, 53, 0.97)"
           ],
-          "datasource": "${DS_INFLUX}",
+          "datasource": null,
           "editable": true,
           "error": false,
           "format": "celsius",
@@ -339,7 +297,7 @@
             "rgba(33, 240, 60, 0.89)",
             "rgba(54, 70, 245, 0.9)"
           ],
-          "datasource": "${DS_INFLUX}",
+          "datasource": null,
           "editable": true,
           "error": false,
           "format": "none",
@@ -466,7 +424,7 @@
             "rgba(240, 33, 33, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_INFLUX}",
+          "datasource": null,
           "editable": true,
           "error": false,
           "format": "none",
@@ -566,12 +524,6 @@
                   "key": "source",
                   "operator": "=",
                   "value": "blackbox"
-                },
-                {
-                  "condition": "AND",
-                  "key": "individual",
-                  "operator": "=",
-                  "value": "OGK"
                 }
               ]
             }
@@ -615,7 +567,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_INFLUX}",
+          "datasource": null,
           "decimals": null,
           "editable": true,
           "error": false,
@@ -686,7 +638,7 @@
                   },
                   {
                     "params": [],
-                    "type": "last"
+                    "type": "mean"
                   }
                 ]
               ],
@@ -715,8 +667,8 @@
           },
           "yaxes": [
             {
-              "format": "celsius",
-              "label": "Temperatura",
+              "format": "none",
+              "label": "Humedad",
               "logBase": 1,
               "max": 50,
               "min": 0,
@@ -735,7 +687,7 @@
         {
           "aliasColors": {},
           "bars": true,
-          "datasource": "${DS_INFLUX}",
+          "datasource": null,
           "decimals": null,
           "editable": true,
           "error": false,
@@ -863,7 +815,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_INFLUX}",
+          "datasource": null,
           "decimals": null,
           "editable": true,
           "error": false,
@@ -983,7 +935,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_INFLUX}",
+          "datasource": null,
           "decimals": null,
           "editable": true,
           "error": false,
@@ -1151,7 +1103,7 @@
     }
   ],
   "time": {
-    "from": "now-7d",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -1187,7 +1139,6 @@
   },
   "refresh": "5m",
   "schemaVersion": 12,
-  "version": 4,
-  "links": [],
-  "gnetId": null
+  "version": 0,
+  "links": []
 }
