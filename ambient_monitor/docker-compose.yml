@@ -76,3 +76,12 @@ services:
       - ./motion-conf/motion.conf:/etc/motion/motion.conf
     volumes_from:
       - motion-storage
+  sensing-service:
+    image: chespi/rpi-sensing
+    container_name: sensing-service
+    depends_on:
+      - influxdb
+    devices:
+      - /dev/ttyAMA0
+      - /dev/mem
+    privileged: true
