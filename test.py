@@ -25,7 +25,9 @@ light_pin = 8
 data_source = "blackbox"
 individual_names_by_pin =  {7: 'OGK'}
 
-
+# InfluxDB URL
+influxdb_url = "http://influxdb:8086"
+influxdb_db = "ambient_metrics"
 # This vars will hold the values of the reading
 # The units are:
 # ambient_temp_value in C
@@ -83,7 +85,7 @@ def get_values(sensor, pin, moist_pins, light_p):
 def push_values(humidity, temperature, moistures, light, data_source, individual_names_by_pin):
 
     # Add general ambient info
-    url = "http://localhost:8086/write?db=indoor_metrics"
+    url = influxdb_url + "/write?db=" + influxdb_db
     payload = "ambient_temp,source=" + data_source + \
        " value=" + str(int(temperature)) + \
         "\nambient_humid,source=blackbox value="  + str(int(humidity)) + \
