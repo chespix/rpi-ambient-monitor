@@ -24,4 +24,4 @@ copy sense.py /project/sense.py
 # Define working directory
 WORKDIR /project
 
-CMD ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "/project/sense_loop.bash"]

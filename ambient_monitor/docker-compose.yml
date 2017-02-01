@@ -39,7 +39,7 @@ services:
     depends_on:
       - nginx-proxy
   final-stack-setup:
-    build: ./stack-final-setup
+    build: ./dockerfiles/stack-final-setup
     container_name: stack-final-setup
     env_file:
       - 'env.grafana'
@@ -77,7 +77,7 @@ services:
     volumes_from:
       - motion-storage
   sensing-service:
-    image: chespi/rpi-sensing
+    build: ./dockerfiles/rpi-sensing
     container_name: sensing-service
     depends_on:
       - influxdb
