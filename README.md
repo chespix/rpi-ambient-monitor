@@ -20,14 +20,14 @@ The data points are saved into an influxDB, and visualized using Grafana.
 
 ## Setup (DOCUMENTATION IN PROGRESS)
 ### Schematics
-The sensor connections is pretty basic. You have to connect the DTH11 to RPI GPIO 4, the Soil Moisture sensor to RPO GPIO 7 and finally the Photo Cell to GPIO 8 with a 1uf pull down resistor.
+The sensor connections is pretty basic. You have to connect the DTH11 to RPI GPIO 4, the Soil Moisture sensor to RPO GPIO 7 and finally the Photo Cell to GPIO 8 with a 1uf pull down resistor. In order to modify the PIN assignation or to have more than one Soil Moisture sensor you need to review and modify the setup variables for the [sense.py](ambient_monitor/rpi-sensing/sense.py) python script. More info on this in the [Fine Tuning section](#fine_tuning).
 Finally connect the USB camera to any of the USB ports in the raspberry pi.
 ![Hardware Schematics placeholder](/images/schematics.png?raw=true "RPI schematics")
 ### Base setup
 
 ### Stack startup
 
-### Fine tuning
+### <a name="fine_tuning"></a>Fine tuning
 If you want to dive deep into the config and fine tune it, I will suggest to start with:
 [I'm a relative reference to a repository file](../blob/master/LICENSE)
 
