@@ -18,7 +18,7 @@ The data points are saved into an influxDB, and visualized using Grafana.
   * [Soil Moisture sensor.](https://www.sparkfun.com/products/13322)
   * [DHT11 temp and humidity sensor.](https://www.adafruit.com/product/386)
 
-## Setup
+## Setup (DOCUMENTATION IN PROGRESS)
 ### Schematics
 ![Hardware Schematics placeholder](/images/schematics.png?raw=true "RPI schematics")
 ### Base setup
