@@ -15,7 +15,7 @@
       "height": "350px",
       "panels": [
         {
-          "content": "<div align=center>\n<h1> Monitor en vivo </H1>\n<h6>Panel del control de estado general</h6>\n<iframe src=\"https://admin:test123@blackcam.chespi.org/\" width=\"330\" height=\"245\" align=middle frameborder=0 ></iframe>\n</div>",
+          "content": "<div align=center>\n<h1> Monitor en vivo </H1>\n<h6>Panel del control de estado general</h6>\n<iframe src=\"https://admin:admin@camera.example.com/\" width=\"330\" height=\"245\" align=middle frameborder=0 ></iframe>\n</div>",
           "editable": true,
           "error": false,
           "id": 14,
