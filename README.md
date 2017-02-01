@@ -10,7 +10,7 @@ The data points are saved into an influxDB, and visualized using Grafana.
 ![Dashboard Screenshot placeholder](/images/dashboard.png?raw=true "Grafana Dashboard")
 
 ## Requirements
-1. A raspberry PI 3 or better (It might work on RPI 2, but I haven tested).
+1. A raspberry PI 3 or better (It might work on RPI 2, but I haven't tested).
 2. The raspberry must have an OS with Docker and docker-compose installed. I recommend using the [hypriot raspberry pi OS image.](https://blog.hypriot.com/downloads/)
 3. An RPI compatible web-cam (I'm using a [logitech c210](http://support.logitech.com/product/webcam-c210)).
 4. The (cheap) sensors:
@@ -18,10 +18,15 @@ The data points are saved into an influxDB, and visualized using Grafana.
   * [Soil Moisture sensor.](https://www.sparkfun.com/products/13322)
   * [DHT11 temp and humidity sensor.](https://www.adafruit.com/product/386)
 
-## Setup
+## Setup (DOCUMENTATION IN PROGRESS)
 ### Schematics
+The sensor connections is pretty basic. You have to connect the DTH11 to RPI GPIO 4, the Soil Moisture sensor to RPO GPIO 7 and finally the Photo Cell to GPIO 8 with a 1uf pull down resistor.
+Finally connect the USB camera to any of the USB ports in the raspberry pi.
 ![Hardware Schematics placeholder](/images/schematics.png?raw=true "RPI schematics")
 ### Base setup
+
+### Stack startup
+
 ### Fine tuning
 If you want to dive deep into the config and fine tune it, I will suggest to start with:
 [I'm a relative reference to a repository file](../blob/master/LICENSE)
