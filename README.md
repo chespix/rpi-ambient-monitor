@@ -5,7 +5,7 @@ This project deploys a fully functional ambient monitoring stack. The same will 
 The data points are saved into an influxDB, and visualized using Grafana.
 
 ## Screenshots
-![Hardware Screenshot placeholder](/images/rpi_wiring.jpg?raw=true "RPI wiring")
+![Hardware Screenshot placeholder](/images/rpi_wiring.png?raw=true "RPI wiring")
 
 ![Dashboard Screenshot placeholder](/images/dashboard.png?raw=true "Grafana Dashboard")
 
