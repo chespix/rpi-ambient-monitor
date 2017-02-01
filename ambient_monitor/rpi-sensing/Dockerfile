@@ -17,8 +17,9 @@ RUN pip install requests
 RUN pip install rpi.gpio
 RUN git clone https://github.com/adafruit/Adafruit_Python_DHT.git
 RUN cd Adafruit_Python_DHT && python setup.py install
-RUN cd / 
-RUN cd / && git clone https://github.com/chespix/project.git
+RUN mkdir /project
+COPY sense_loop.bash /project/sense_loop.bash
+copy sense.py /project/sense.py
 
 # Define working directory
 WORKDIR /project
