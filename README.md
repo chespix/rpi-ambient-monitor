@@ -51,7 +51,7 @@ In order to do so, edit the file [sensor_motion.json](ambient_monitor/grafana-da
 If you are planning on accessing your ambient monitor service from the web, it is very important to setup SSL to keep your video feed and dashboard safe. In order to do so, you will need to generate your own SSL cert and key if you don't have one. You can follow the instructions on [this site](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs) to generate them.
 Once you have your SSL cert and key, copy them to the folder [nginx-certs](ambient_monitor/nginx-certs) and name them as your base domain, as the example cert and key files placed on the directory.
 
-### Stack environment variables 
+#### Stack environment variables 
 Finally you need to update the FQDN that will be used for accesing the services in the [env.stack](ambient_monitor/env.stack) file.
 
 ### <a name="stack_startup"></a>Stack startup
