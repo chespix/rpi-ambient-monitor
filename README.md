@@ -44,8 +44,12 @@ webcontrol_authentication admin:admin
 
 #### Grafana initial dashboard
 Now we will update the grafana default dashboard to use the correct motion stream credentials.
-In order to do so, edit the file [sensor_motion.json](ambient_monitor/grafana-dashboards/sensor_monitor.json), search for the above string, and update with your FQDN for the stream service, and the stream service credentials previously setup in motion conf. If you are not accessing the service from the web, you must use your docker host IP instead of the FQDN.
+In order to do so, edit the file [sensor_motion.json](ambient_monitor/grafana-dashboards/sensor_monitor.json) and search for the above string:
+
 `<iframe src=\"https://admin:admin@camera.example.com/\"`
+
+Then update the string replacing with your FQDN for the stream service, and the stream service credentials previously setup in motion configuration. If you are not accessing the service from the web, you must use your docker host IP instead of the FQDN.
+
 
 #### Nginx SSL certificate and key
 If you are planning on accessing your ambient monitor service from the web, it is very important to setup SSL to keep your video feed and dashboard safe. In order to do so, you will need to generate your own SSL cert and key if you don't have one. You can follow the instructions on [this site](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs) to generate them.
