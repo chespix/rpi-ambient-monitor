@@ -3,6 +3,8 @@
 # Requirements:
 # adafruit library installed:
 # https://github.com/adafruit/Adafruit_Python_DHT
+# Driver for lux sensor:
+# https://github.com/lexruee/tsl2561
 # python libraries installed:
 # pip install requests
 # pip install rpi.gpio
@@ -15,6 +17,8 @@ import requests
 import json
 import RPi.GPIO as GPIO
 import Adafruit_DHT
+from tentacle_pi.TSL2561 import TSL2561
+
 
 # InfluxDB URL and DB name
 influxdb_url = "http://influxdb:8086"
@@ -24,11 +28,10 @@ influxdb_db = "ambient_metrics"
 ambient_sensor = 11
 ambient_pin = 4
 moisture_pins = [7] # Remember to set the individual name for each pin in next section
-light_pin = 8
 
 # For now the source and individual names are hardcoded
 data_source = "blackbox"
-individual_names_by_pin =  {7: 'OGK'}
+individual_names_by_pin =  {7: 'AUTOS'}
 
 
 # This vars will hold the values of the reading
@@ -36,35 +39,28 @@ individual_names_by_pin =  {7: 'OGK'}
 # ambient_temp_value in C
 # ambient_humid_value in %
 # plant_moisture_value as a boolean. (wet or not)
-# ambient_light_value in the capacitor charge value. *
-# * Weird, but it can be read as follows:
-#     near 0 full light, Near 400000 full dark
+# ambient_light_value in Lux
 
 # Setup GPIO for moisture sensor
 GPIO.setmode(GPIO.BCM)
 for pin in moisture_pins:
     GPIO.setup(pin, GPIO.IN)
 
+# Setup i2c light sensor
+tsl = TSL2561(0x39,"/dev/i2c-1")
+tsl.enable_autogain()
+#tsl.set_gain(0x08)
+tsl.set_time(0x00)
+
+
 # Function to get light sensor value
-def light_value (pin_to_circuit):
-    count = 0
+def light_value ():
 
-    #Output on the pin for
-    GPIO.setup(pin_to_circuit, GPIO.OUT)
-    GPIO.output(pin_to_circuit, GPIO.LOW)
-    time.sleep(0.1)
-
-    #Change the pin back to input
-    GPIO.setup(pin_to_circuit, GPIO.IN)
-
-    #Count until the pin goes high or count is high enough that is dark
-    while (GPIO.input(pin_to_circuit) == GPIO.LOW and count < 2000):
-        count += 1
-
-    return count
+    #Output of i2c light sensor
+    return tsl.lux()
 
 # Function to get values
-def get_values(sensor, pin, moist_pins, light_p):
+def get_values(sensor, pin, moist_pins):
     # Get humidity and temp values from HDT11 sensor
     humidity = None
     while humidity is None or temperature is None:
@@ -79,8 +75,7 @@ def get_values(sensor, pin, moist_pins, light_p):
             moistures[sensor] = 1
 
     # Get capacitor value for light sensor
-    light = light_value(light_p)
-    #light = 0
+    light = light_value()
 
     return humidity, temperature, moistures, light
 
@@ -114,7 +109,7 @@ def show_values(humidity, temperature, moistures, light):
         print('Nose pudo leer sensor de ambiente. Volver a intentar!')
 
     # How much is the light value?
-    print("Luz: " + str(light))
+    print("Lux: " + str(light))
 
     #show individual info
     for pin, moisture in moistures.items():
@@ -133,13 +128,15 @@ try:
     # Main program
 
     # Get initial values
-    ambient_humid_value, ambient_temp_value, individuals_moisture_value, ambient_light_value = get_values(ambient_sensor, ambient_pin, moisture_pins, light_pin)
+    ambient_humid_value, ambient_temp_value, individuals_moisture_value, ambient_light_value = get_values(ambient_sensor, ambient_pin, moisture_pins)
+
+
+    # Print the values or error
+    show_values(ambient_humid_value,ambient_temp_value, individuals_moisture_value, ambient_light_value)
 
     # Push the values into DB
     push_values(ambient_humid_value,ambient_temp_value, individuals_moisture_value, ambient_light_value, data_source, individual_names_by_pin)
 
-    # Print the values or error
-    show_values(ambient_humid_value,ambient_temp_value, individuals_moisture_value, ambient_light_value)
 
 # If keyboard interrupt, cleanup pin setup
 except KeyboardInterrupt:
